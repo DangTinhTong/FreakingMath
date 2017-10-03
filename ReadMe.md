@@ -8,4 +8,5 @@
 6. Tạo hàm ngẫu nhiên -(void)ngauNhien;
 7. Xử lý các button chọn đúng, chọn sai
  -- Action chưa xử lý được.
-    + Khi so1-so2= giá trị âm mà đúng chọn đúng thì gameover??
+    - Khi so1-so2= giá trị âm mà đúng chọn đúng thì gameover?
+    - Why? Why? Why????

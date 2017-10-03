@@ -4,3 +4,8 @@
   (021017) 
 4. Xử lý được phép tính.
 5. Xử lý ketQuaLable.
+ (02102017)
+6. Tạo hàm ngẫu nhiên -(void)ngauNhien;
+7. Xử lý các button chọn đúng, chọn sai
+ -- Action chưa xử lý được.
+    + Khi so1-so2= giá trị âm mà đúng chọn đúng thì gameover??

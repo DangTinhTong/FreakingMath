@@ -22,6 +22,7 @@
 - (IBAction)trueButtonAction:(id)sender;
 - (IBAction)falseButtonAction:(id)sender;
 
+-(void)ngauNhien;
 
 @end
 

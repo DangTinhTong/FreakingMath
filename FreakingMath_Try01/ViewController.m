@@ -17,7 +17,8 @@
     NSArray *arrPhepToan ; // Khai báo mảng chứa các phần tử cộng, trừ,
     NSArray *arrKetQuaCong; // Mảng chưa kết quả cộng
     NSArray *arrKetQuaTru;  // Mảng chứa kết quả trừ
-    NSArray *ketQua;
+    int ketQua;
+    int diem;
 }
 @end
 
@@ -41,8 +42,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    
+    [self ngauNhien];
+}
+
+// Tạo một hàm ngẫu nhiên/
+-(void)ngauNhien
+{
+
     // Lấy số ngẫu nhiên
     // Số thứ nhất lấy random từ 0 tới 19
     
@@ -123,13 +129,19 @@
    // Gán kêts quá bằng cách ngầu nhiên giống như với phép toán
     if([phepToan isEqual:@"+"]){
         
-        ketQua=[arrKetQuaCong  objectAtIndex:arc4random()%(arrKetQuaCong.count)];
-    [self.ketQuaLabel setText:[NSString stringWithFormat:@"%@", ketQua]];
+        ketQua=[[arrKetQuaCong  objectAtIndex:arc4random()%(arrKetQuaCong.count)]intValue];
+    [self.ketQuaLabel setText:[NSString stringWithFormat:@"%d", ketQua]];
     }else{
-        ketQua=[arrKetQuaTru objectAtIndex:arc4random()%(arrKetQuaTru.count)];
-        [self.ketQuaLabel setText:[NSString stringWithFormat:@"%@",ketQua]];
+        ketQua=[[arrKetQuaTru objectAtIndex:arc4random()%(arrKetQuaTru.count)] intValue];
+        [self.ketQuaLabel setText:[NSString stringWithFormat:@"%d",ketQua]];
     }
 }
+
+
+//03102017
+// Xử lý button
+// Nếu đúng thì chuyển màn cho chơi tiếp
+// Nếu sai thì dừng game
 
 
 - (void)didReceiveMemoryWarning {
@@ -141,8 +153,65 @@
 
 
 - (IBAction)trueButtonAction:(id)sender {
-}
+    if([phepToan isEqual:@"+"]){
+        if((so1+so2)==[self.ketQuaLabel.text intValue])
+        {
+            // Nguoi choi lam dung.
+            // Cho phep chuyen phep toan tiep theo.
+            // Goi ham ngauNhien
+            [self ngauNhien];
+            
+        }else{
+            //-Nguoi choi chon sai.
+            //-Dung game.
+            NSLog(@"Game over");
+        }
+    }else{
+        if((so1-so2)==[self.phepToanLabel.text intValue])
+        {
+             //-Nguoi choi lam dung.
+            //- Cho phep nguoi choi chuyen sang phep toan tiep theo.
+            // Goi ham ngau nhien
+            [self ngauNhien] ;
+            diem++;
+            [self.diemLabel setText:[NSString stringWithFormat:@"%d",diem]];
+        }else{
+            // - Nguoi choi chon sai.
+            // - Dung game.
+            NSLog(@"Game over");
+        }
+    }
+    }
 
 - (IBAction)falseButtonAction:(id)sender {
+    
+    if([phepToan isEqual:@"+"]){
+        if((so1+so2)!=[self.ketQuaLabel.text intValue])
+        {
+            // Nguoi choi lam dung.
+            // Cho phep chuyen phep toan tiep theo.
+            // Goi ham ngauNhien
+            [self ngauNhien];
+            diem++;
+            [self.diemLabel setText:[NSString stringWithFormat:@"%d",diem]];
+            
+        }else{
+            //-Nguoi choi chon sai.
+            //-Dung game.
+            NSLog(@"Game over");
+        }
+    }else{
+        if((so1-so2)!=[self.phepToanLabel.text intValue])
+        {
+            //-Nguoi choi lam dung.
+            //- Cho phep nguoi choi chuyen sang phep toan tiep theo.
+            // Goi ham ngau nhien
+            [self ngauNhien] ;
+        }else{
+            // - Nguoi choi chon sai.
+            // - Dung game.
+            NSLog(@"Game over");
+        }
+    }
 }
 @end

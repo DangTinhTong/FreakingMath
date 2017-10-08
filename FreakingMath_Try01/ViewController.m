@@ -19,6 +19,7 @@
     NSArray *arrKetQuaTru;  // Mảng chứa kết quả trừ
     int ketQua;
     int diem;
+    NSTimer *thoiGian;
 }
 @end
 
@@ -42,12 +43,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    // 081017
+    // Khong cho nguoi dung thay doi gia tri thanh sliser
+    [self.thoiGianSlider setEnabled:false];
+    self.thoiGianSlider.value=5;
+    
+    self.thoiGianSlider.minimumValue = 0;
+    self.thoiGianSlider.maximumValue = 5;
+   thoiGian=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(gioiHanThoiGian) userInfo:nil repeats:true];
     [self ngauNhien];
 }
-
+// Ham gioi han thoi gian
+-(void) gioiHanThoiGian{
+    self.thoiGianSlider.value--;
+    if(self.thoiGianSlider.value==0){
+        NSLog(@"Het thoi gian");
+        [thoiGian invalidate];
+    }
+}
 // Tạo một hàm ngẫu nhiên/
 -(void)ngauNhien
 {
+    self.thoiGianSlider.value=5;
+  //  [self gioiHanThoiGian];
 
     // Lấy số ngẫu nhiên
     // Số thứ nhất lấy random từ 0 tới 19
@@ -135,7 +153,9 @@
         ketQua=[[arrKetQuaTru objectAtIndex:arc4random()%(arrKetQuaTru.count)] intValue];
         [self.ketQuaLabel setText:[NSString stringWithFormat:@"%d",ketQua]];
     }
+    
 }
+
 
 
 //03102017
@@ -160,6 +180,8 @@
             // Cho phep chuyen phep toan tiep theo.
             // Goi ham ngauNhien
             [self ngauNhien];
+            diem++;
+            [self.diemLabel setText:[NSString stringWithFormat:@"%d",diem]];
             
         }else{
             //-Nguoi choi chon sai.
@@ -181,7 +203,7 @@
             NSLog(@"Game over");
         }
     }
-    }
+}
 
 - (IBAction)falseButtonAction:(id)sender {
     
@@ -207,6 +229,8 @@
             //- Cho phep nguoi choi chuyen sang phep toan tiep theo.
             // Goi ham ngau nhien
             [self ngauNhien] ;
+            diem++;
+            [self.diemLabel setText:[NSString stringWithFormat:@"%d",diem]];
         }else{
             // - Nguoi choi chon sai.
             // - Dung game.

@@ -57,9 +57,14 @@
 -(void) gioiHanThoiGian{
     self.thoiGianSlider.value--;
     if(self.thoiGianSlider.value==0){
-        NSLog(@"Het thoi gian");
+        [self gameOver] ;
         [thoiGian invalidate];
     }
+}
+
+// GameOver function
+-(void)gameOver{
+    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"gameOver"] animated:true completion:nil];
 }
 // Tạo một hàm ngẫu nhiên/
 -(void)ngauNhien
@@ -186,7 +191,7 @@
         }else{
             //-Nguoi choi chon sai.
             //-Dung game.
-            NSLog(@"Game over");
+            [self gameOver];
         }
     }else{
         if((so1-so2)==[self.phepToanLabel.text intValue])
@@ -200,7 +205,7 @@
         }else{
             // - Nguoi choi chon sai.
             // - Dung game.
-            NSLog(@"Game over");
+            [self gameOver];
         }
     }
 }
@@ -220,7 +225,7 @@
         }else{
             //-Nguoi choi chon sai.
             //-Dung game.
-            NSLog(@"Game over");
+            [self gameOver];
         }
     }else{
         if((so1-so2)!=[self.phepToanLabel.text intValue])
@@ -234,7 +239,7 @@
         }else{
             // - Nguoi choi chon sai.
             // - Dung game.
-            NSLog(@"Game over");
+            [self gameOver];
         }
     }
 }
